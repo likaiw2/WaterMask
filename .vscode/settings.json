@@ -1,0 +1,5 @@
+{
+    "python.analysis.extraPaths": [
+        "./tools/model_converters/detectron2py"
+    ]
+}

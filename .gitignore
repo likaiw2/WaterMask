@@ -1,1 +1,3 @@
 data/
+out/
+mmdet/apis/__pycache__/

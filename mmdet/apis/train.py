@@ -128,8 +128,7 @@ def train_detector(model,
     # prepare data loaders
     dataset = dataset if isinstance(dataset, (list, tuple)) else [dataset]
 
-    runner_type = 'EpochBasedRunner' if 'runner' not in cfg else cfg.runner[
-        'type']
+    runner_type = 'EpochBasedRunner' if 'runner' not in cfg else cfg.runner['type']
 
     train_dataloader_default_args = dict(
         samples_per_gpu=2,
