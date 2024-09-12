@@ -1,3 +1,4 @@
 data/
 out/
 mmdet/apis/__pycache__/
+REFERENCE/
