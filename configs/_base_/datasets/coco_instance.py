@@ -1,6 +1,6 @@
 # dataset settings
 dataset_type = 'CocoDataset'
-data_root = 'data/UDW/'
+data_root = 'data/UIIS/'
 img_norm_cfg = dict(
     mean = [81.236, 113.761, 117.095], std = [60.598, 58.471, 62.821], to_rgb=True)
 train_pipeline = [
