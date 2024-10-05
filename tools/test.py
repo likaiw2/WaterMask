@@ -24,11 +24,11 @@ from mmdet.utils import (build_ddp, build_dp, compat_cfg, get_device,
 def parse_args():
     parser = argparse.ArgumentParser(
         description='MMDet test (and eval) a model')
-    parser.add_argument('config', help='test config file path')
-    parser.add_argument('checkpoint', help='checkpoint file')
+    parser.add_argument('--config', help='test config file path',default='/home/liw324/code/WaterMask/configs/_our_/water_r50_fpn_1x.py')
+    parser.add_argument('--checkpoint', help='checkpoint file',default='/home/liw324/code/WaterMask/out/water_r50_fpn_1x/latest.pth')
     parser.add_argument(
         '--work-dir',
-        help='the directory to save the file containing evaluation metrics')
+        help='the directory to save the file containing evaluation metrics',default="WaterMask/out/eval/water_r50_fpn_1x")
     parser.add_argument('--out', help='output result file in pickle format')
     parser.add_argument(
         '--fuse-conv-bn',
@@ -58,7 +58,8 @@ def parse_args():
         type=str,
         nargs='+',
         help='evaluation metrics, which depends on the dataset, e.g., "bbox",'
-        ' "segm", "proposal" for COCO, and "mAP", "recall" for PASCAL VOC')
+        ' "segm", "proposal" for COCO, and "mAP", "recall" for PASCAL VOC',
+        default="segm")
     parser.add_argument('--show', action='store_true', help='show results')
     parser.add_argument(
         '--show-dir', help='directory where painted images will be saved')

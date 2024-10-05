@@ -76,7 +76,8 @@ def mask2bbox(masks):
             positive region in binary mask.
     """
     N = masks.shape[0]
-    bboxes = masks.new_zeros((N, 4), dtype=torch.float32)
+    # bboxes = masks.new_zeros((N, 4), dtype=torch.float32)
+    bboxes = np.zeros_like(masks)
     x_any = torch.any(masks, dim=1)
     y_any = torch.any(masks, dim=2)
     for i in range(N):
