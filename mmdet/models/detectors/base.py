@@ -8,7 +8,7 @@ import torch
 import torch.distributed as dist
 from mmcv.runner import BaseModule, auto_fp16
 
-from mmdet.core.visualization import imshow_det_bboxes
+from mmdet.core.visualization import imshow_det_bboxes,draw_masks
 
 
 class BaseDetector(BaseModule, metaclass=ABCMeta):
@@ -353,6 +353,8 @@ class BaseDetector(BaseModule, metaclass=ABCMeta):
             wait_time=wait_time,
             out_file=out_file)
 
+        # img = draw_masks
+        
         if not (show or out_file):
             return img
 

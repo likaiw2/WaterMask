@@ -2,3 +2,5 @@ data/
 out/
 mmdet/apis/__pycache__/
 REFERENCE/
+out_SUIM/
+out_UIIS/

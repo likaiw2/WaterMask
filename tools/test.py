@@ -62,7 +62,8 @@ def parse_args():
         default="segm")
     parser.add_argument('--show', action='store_true', help='show results')
     parser.add_argument(
-        '--show-dir', help='directory where painted images will be saved')
+        '--show-dir', help='directory where painted images will be saved',
+        default='/home/liw324/code/WaterMask/out/eval/water_r50_fpn_1x/seg_out')
     parser.add_argument(
         '--show-score-thr',
         type=float,

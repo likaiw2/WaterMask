@@ -9,6 +9,7 @@ import warnings
 import mmcv
 import torch
 import torch.distributed as dist
+from tqdm import tqdm
 from mmcv import Config, DictAction
 from mmcv.runner import get_dist_info, init_dist
 from mmcv.utils import get_git_hash
@@ -20,12 +21,18 @@ from mmdet.models import build_detector
 from mmdet.utils import (collect_env, get_device, get_root_logger,
                          replace_cfg_vals, setup_multi_processes,
                          update_data_root)
+import datetime
+
+model_name="water_r50_fpn_1x"
+# model_name="water_r50_fpn_ms3x"
+# model_name="water_r101_fpn_1x"
+# model_name="water_r101_fpn_ms3x"
 
 def parse_args():
     parser = argparse.ArgumentParser(description='Train a detector')
-    # parser.add_argument('--config', help='train config file path',default="WaterMask/configs/_our_/water_r50_fpn_ms3x.py")
-    parser.add_argument('--config', help='train config file path',default="WaterMask/configs/_our_/water_r50_fpn_1x.py")
-    parser.add_argument('--work-dir', help='the dir to save logs and models',default="WaterMask/out/water_r50_fpn_1x")
+    parser.add_argument('--config', help='train config file path',default=f"WaterMask/configs/_our_/{model_name}.py")
+    parser.add_argument('--work-dir', help='the dir to save logs and models',default=f"WaterMask/out_SUIM/{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}_{model_name}")
+
     parser.add_argument(
         '--resume-from', help='the checkpoint file to resume from')
     parser.add_argument(
@@ -214,6 +221,20 @@ def main():
     model.init_weights()
 
     datasets = [build_dataset(cfg.data.train)]
+    # problem_item = []
+    # good_item = []
+    # for item in tqdm(enumerate(datasets[0])):
+    #     try:
+    #         x = item[1]['gt_masks'].data.masks.max()
+    #     except ValueError:
+    #         # print(item[1]['img_metas'].data["ori_filename"])
+    #         problem_item.append(item[1]['img_metas'].data["ori_filename"])
+    #     else:
+    #         good_item.append(item[1]['img_metas'].data["ori_filename"])
+    
+    # print("problem_item: ",problem_item)
+    # # print("good_item: ",len(good_item))
+    
     if len(cfg.workflow) == 2:
         val_dataset = copy.deepcopy(cfg.data.val)
         val_dataset.pipeline = cfg.data.train.pipeline

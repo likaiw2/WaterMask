@@ -59,7 +59,15 @@ def single_gpu_test(model,
                     show=show,
                     out_file=out_file,
                     score_thr=show_score_thr)
-
+                
+        # # mask visualize
+        # for cate in range(len(result[0][1])):
+        #     img_name=data['img_metas'][0].data[0][0]['ori_filename'][:-4]
+        #     filepath=f"/home/liw324/code/WaterMask/out/eval/water_r50_fpn_1x/{img_name}/{cate+1}"
+        #     mask=result[0][1][cate]
+        
+        # exit()
+        
         # encode mask results
         if isinstance(result[0], tuple):
             result = [(bbox_results, encode_mask_results(mask_results))
